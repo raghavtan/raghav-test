@@ -1,0 +1,38 @@
+---
+apiVersion: of-catalog/v1alpha1
+kind: Scorecard
+metadata:
+    name: observability
+spec:
+  name: observability
+  description: "https://github.com/motain/of-catalog/blob/main/docs/grading-system/observability.md#observability-grading-system"
+  ownerId: 712020:edcf2690-1f3e-4310-9eb8-1ecef88d64b6
+  state: "PUBLISHED" # DRAFT - PUBLISHED
+  componentTypeIds: ["SERVICE"]
+  importance: REQUIRED
+  scoringStrategyType: "WEIGHT_BASED" # WEIGHT_BASED - POINT_BASED
+  criteria:
+    - hasMetricValue:
+        weight: 15
+        name: instrumentation-check
+        metricName: instrumentation-check
+        comparatorValue: 1
+        comparator: "EQUALS" # EQUALS - GREATER_THAN - LESS_THAN - GREATER_THAN_OR_EQUAL_TO - LESS_THAN_OR_EQUAL_TO
+    - hasMetricValue:
+        weight: 15
+        name: critical-alerts-slo-check
+        metricName: critical-alerts-slo-check
+        comparatorValue: 1
+        comparator: "EQUALS" # EQUALS - GREATER_THAN - LESS_THAN - GREATER_THAN_OR_EQUAL_TO - LESS_THAN_OR_EQUAL_TO
+    - hasMetricValue:
+        weight: 45
+        name: alert-routing-and-notifications
+        metricName: alert-routing-and-notifications
+        comparatorValue: 1
+        comparator: "EQUALS" # EQUALS - GREATER_THAN - LESS_THAN - GREATER_THAN_OR_EQUAL_TO - LESS_THAN_OR_EQUAL_TO
+    - hasMetricValue:
+        weight: 25
+        name: observability-documentation
+        metricName: observability-documentation
+        comparatorValue: 1
+        comparator: "EQUALS" # EQUALS - GREATER_THAN - LESS_THAN - GREATER_THAN_OR_EQUAL_TO - LESS_THAN_OR_EQUAL_TO

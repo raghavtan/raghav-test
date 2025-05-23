@@ -1,0 +1,26 @@
+---
+apiVersion: of-catalog/v1alpha1
+kind: Scorecard
+metadata:
+    name: production-readiness
+spec:
+  name: production-readiness
+  description: "https://github.com/motain/of-catalog/blob/main/docs/grading-system/production-readiness.md#production-readiness-grading-system"
+  ownerId: 712020:edcf2690-1f3e-4310-9eb8-1ecef88d64b6
+  state: "PUBLISHED" # DRAFT - PUBLISHED
+  componentTypeIds: ["SERVICE"]
+  importance: REQUIRED
+  scoringStrategyType: "WEIGHT_BASED" # WEIGHT_BASED - POINT_BASED
+  criteria:
+    - hasMetricValue:
+        weight: 50
+        name: organizational-standards
+        metricName: organizational-standards
+        comparatorValue: 1
+        comparator: "EQUALS" # EQUALS - GREATER_THAN - LESS_THAN - GREATER_THAN_OR_EQUAL_TO - LESS_THAN_OR_EQUAL_TO
+    - hasMetricValue:
+        weight: 50
+        name: deployment-readiness
+        metricName: deployment-readiness
+        comparatorValue: 1
+        comparator: "EQUALS" # EQUALS - GREATER_THAN - LESS_THAN - GREATER_THAN_OR_EQUAL_TO - LESS_THAN_OR_EQUAL_TO

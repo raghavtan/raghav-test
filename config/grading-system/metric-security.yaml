@@ -1,0 +1,45 @@
+---
+apiVersion: of-catalog/v1alpha1
+kind: Metric
+metadata:
+  name: security-as-pipeline
+  labels:
+    grading-system: security
+  componentType:
+    - service
+    - cloud-resource
+  facts:
+    - id: trivy-exists-in-ci
+      name: Check if Trivy is used in CI/CD pipeline
+      type: extract
+      source: github
+      repo: "${Metadata.Name}"
+      searchString: "motain/onefootball-actions/security"
+      rule: "search"
+spec:
+  name: security-as-pipeline
+  description: "https://github.com/motain/of-catalog/blob/main/docs/grading-system/security.md#security-as-pipeline"
+  format:
+    unit: "Security as Pipeline"
+---
+apiVersion: of-catalog/v1alpha1
+kind: Metric
+metadata:
+  name: vulnerability-management
+  labels:
+    grading-system: security
+  componentType:
+    - service
+    - cloud-resource
+  facts:
+    - id: service-vulnerabilities-prometheus
+      name: Get summary of vulnerabilities for services from Prometheus reports
+      type: extract
+      source: prometheus
+      prometheusQuery: "sum(trivy_image_vulnerabilities{namespace=\"${Metadata.Name}\", severity=\"Critical\" })"
+
+spec:
+  name: vulnerability-management
+  description: "https://github.com/motain/of-catalog/blob/main/docs/grading-system/security.md#vulnerability-management"
+  format:
+    unit: "Vulnerability Management"
